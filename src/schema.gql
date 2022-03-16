@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  access_token: String!
+  email: String!
+  id: ID!
+}
+
+type MessageResponse {
+  message: String!
+}
+
+type Mutation {
+  login(userLoginInput: UserCreateInput!): AuthResponse!
+  logout: MessageResponse!
+  refresh: AuthResponse!
+  register(userCreateInput: UserCreateInput!): AuthResponse!
+}
+
+type Query {
+  user(UserWhereUniqueInput: UserWhereUniqueInput!): User!
+}
+
+type User {
+  email: String!
+  id: ID!
+}
+
+type UserAvgAggregate {
+  id: Float
+}
+
+type UserCountAggregate {
+  _all: Int!
+  email: Int!
+  id: Int!
+}
+
+input UserCreateInput {
+  email: String!
+  isEmailConfirmed: Boolean
+  password: String!
+}
+
+type UserMaxAggregate {
+  email: String
+  id: Int
+}
+
+type UserMinAggregate {
+  email: String
+  id: Int
+}
+
+type UserSumAggregate {
+  id: Int
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
+}

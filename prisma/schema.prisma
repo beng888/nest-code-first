@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+  provider               = "node node_modules/prisma-nestjs-graphql"
+  output                 = "../src/@generated/prisma-nestjs-graphql"
+  fields_Validator_from  = "class-validator"
+  fields_Validator_input = true
+  reExport               = "Directories"
+}
+
+model User {
+  id    Int   @id  @default(autoincrement()) 
+  /// @Validator.IsEmail()
+  email    String  @unique 
+  /// @Validator.MinLength(3)
+  /// @HideField()
+  password String  
+  /// @HideField({ output: true, input: true })
+  createdAt DateTime @default(now())
+  /// @HideField({ output: true, input: true })
+  updatedAt DateTime @updatedAt
+  /// @HideField({ output: true, input: true })
+  refresh_token String?
+  /// @HideField()
+  isEmailConfirmed Boolean @default(false)
+}
